@@ -1,21 +1,23 @@
- # User Registration API
+# User Registration & Login API
 
-## Endpoint
+## Register User
+
 **POST** `/users/register`
 
-## Description
+### Description
 This endpoint allows a new user to register by providing their details. It validates the input data and creates a new user in the database.
 
-## Request Body
+### Request Body
 The request body must be in JSON format and include the following fields:
 
 - `fullname`: An object containing:
-  - `firstname`: A string representing the user's first name (required, minimum length: 3 characters).
-  - `lastname`: A string representing the user's last name (required, minimum length: 3 characters).
-- `email`: A string representing the user's email address (required, must be a valid email format).
-- `password`: A string representing the user's password (required, minimum length: 8 characters).
+  - `firstname`: A string (required, minimum 3 characters)
+  - `lastname`: A string (required, minimum 3 characters)
+- `email`: A string (required, valid email format)
+- `password`: A string (required, minimum 8 characters)
 
-### Example Request
+#### Example
+```json
 {
   "fullname": {
     "firstname": "John",
@@ -24,10 +26,12 @@ The request body must be in JSON format and include the following fields:
   "email": "john.doe@example.com",
   "password": "securepassword"
 }
+```
 
-## Responses
-- **201 Created**: User successfully registered.
-  - Response body:
+### Responses
+
+- **201 Created**
+  ```json
   {
     "token": "JWT_TOKEN",
     "user": {
@@ -38,9 +42,9 @@ The request body must be in JSON format and include the following fields:
       "email": "john.doe@example.com"
     }
   }
-
-- **400 Bad Request**: Validation errors occurred.
-  - Response body:
+  ```
+- **400 Bad Request**
+  ```json
   {
     "errors": [
       {
@@ -50,7 +54,70 @@ The request body must be in JSON format and include the following fields:
       }
     ]
   }
+  ```
 
-## Status Codes
+### Status Codes
 - **201**: User created successfully.
 - **400**: Validation errors in the request body.
+
+---
+
+## Login User
+
+**POST** `/users/login`
+
+### Description
+This endpoint allows an existing user to log in by providing their email and password. If the credentials are valid, a JWT token is returned.
+
+### Request Body
+The request body must be in JSON format and include:
+
+- `email`: A string (required, valid email format)
+- `password`: A string (required)
+
+#### Example
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword"
+}
+```
+
+### Responses
+
+- **200 OK**
+  ```json
+  {
+    "token": "JWT_TOKEN",
+    "user": {
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com"
+    }
+  }
+  ```
+- **400 Bad Request**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid email format",
+        "param": "email",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Invalid email or password"
+  }
+  ```
+
+### Status Codes
+- **200**: Login successful.
+- **400**: Validation errors in the request body.
+- **401**: Invalid email or password.

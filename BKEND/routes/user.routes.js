@@ -10,7 +10,15 @@ router.post('/register', [  //here we check the info using express-validator, if
     body('email').isEmail().withMessage('Invalid email format'),
     body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
 ],  
-   usercontroller.registerUser); //route for user registration, all validation will be handled in the controller
+   usercontroller.registerUser
+) //route for user registration, all validation will be handled in the controller
+
+router.post('/login', [  //route for user login, all validation will be handled in the controller
+    body('email').isEmail().withMessage('Invalid email format'),
+    body('password').notEmpty().withMessage('Password is required')
+],  
+   usercontroller.loginUser
+); 
 
 
 module.exports = router;  // Export the router to be used in the main app
