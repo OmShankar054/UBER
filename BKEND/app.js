@@ -1,10 +1,14 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const express = require("express");
-const cors = require('cors');
-const app = express();//app variable create kiye. -- uske ander express ko call kia hua hai
+const dotenv = require('dotenv'); // used because of environmental variable
+dotenv.config();                 //  used because of environmental variable 
 
-app.use(cors());
+const express = require("express");
+const cors = require('cors'); //cors setup
+const app = express();//app variable create kiye. -- uske ander express ko call kia hua hai
+const connectToDb = require('./db/db'); //require database
+
+connectToDb(); //call
+
+app.use(cors()); //cors use 
 
 
 
@@ -13,4 +17,4 @@ app.get('/', (req, res) => { //route
 });
 
 
-module.exports = app;  
+module.exports = app;// app variable is being exported
