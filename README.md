@@ -121,3 +121,92 @@ The request body must be in JSON format and include:
 - **200**: Login successful.
 - **400**: Validation errors in the request body.
 - **401**: Invalid email or password.
+
+---
+
+## Get User Profile
+
+**GET** `/users/profile`
+
+### Description
+This endpoint returns the authenticated user's profile information. Requires a valid authentication token (JWT) in the cookie or `Authorization` header.
+
+### Headers
+- `Cookie: token=JWT_TOKEN`  
+  or  
+- `Authorization: Bearer JWT_TOKEN`
+
+### Responses
+
+- **200 OK**
+  ```json
+  {
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Authentication token is missing"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Invalid token"
+  }
+  ```
+- **404 Not Found**
+  ```json
+  {
+    "message": "User not found"
+  }
+  ```
+
+### Status Codes
+- **200**: Profile fetched successfully.
+- **401**: Authentication failed or token is missing/invalid.
+- **404**: User not found.
+
+---
+
+## Logout User
+
+**GET** `/users/logout`
+
+### Description
+This endpoint logs out the authenticated user by clearing the authentication token and blacklisting it. Requires a valid authentication token (JWT).
+
+### Headers
+- `Cookie: token=JWT_TOKEN`  
+  or  
+- `Authorization: Bearer JWT_TOKEN`
+
+### Responses
+
+- **200 OK**
+  ```json
+  {
+    "message": "User logged out successfully"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Authentication token is missing"
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "message": "Invalid token"
+  }
+  ```
+
+### Status Codes
+- **200**: Logout successful.
+- **401**: Authentication failed or token is missing/invalid.

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router(); //calling express router
 const {body} = require('express-validator'); //for validation
 const usercontroller = require('../controllers/user.controller'); //importing user controller
+const authMiddleware = require('../middlewres/auth.middlewares'); //importing auth middleware
 
 
 router.post('/register', [  //here we check the info using express-validator, if any canhge is needed, it will be done in registerUser function
@@ -18,7 +19,11 @@ router.post('/login', [  //route for user login, all validation will be handled 
     body('password').notEmpty().withMessage('Password is required')
 ],  
    usercontroller.loginUser
-); 
+)
 
+router.get('/profile', authMiddleware.authUser, usercontroller.getUserProfile); //route for getting user profile, all validation will be handled in the controller
+
+
+router.get('/logout', authMiddleware.authUser, usercontroller.logoutUser); //route for user logout, all validation will be handled in the controller
 
 module.exports = router;  // Export the router to be used in the main app

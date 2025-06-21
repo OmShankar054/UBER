@@ -1,6 +1,7 @@
 const userModel = require('../models/user.models');
 const userService = require('../services/user.services');
 const { validationResult } = require('express-validator'); //for validation
+const blacklistTokenModel = require('../models/blacklistToken.model'); // Import the blacklist token model
 
 module.exports.registerUser = async (req,res,next) => //register user controller    
 {
@@ -30,7 +31,8 @@ module.exports.registerUser = async (req,res,next) => //register user controller
     } catch (error) {
         next(error);
     }
-}
+} // End of register user controller
+// This controller handles user registration, validates input, hashes the password, and returns a token and user data
 
 module.exports.loginUser = async (req, res, next) => { //login user controller
     // Validate the request body using express-validator  // This will check if the email and password fields are present and valid
@@ -56,8 +58,34 @@ module.exports.loginUser = async (req, res, next) => { //login user controller
         }
 
         const token = user.generateAuthToken();
+
+        res.cookie('token', token, { // Set the token in a cookie
+            httpOnly: true, // Make the cookie HTTP only
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+            maxAge: 24 * 60 * 60 * 1000 // Set cookie expiration to 1 day
+        });
         
         res.status(200).json({token, user}); //
         
     
-    }
+} // End of login user controller, // This controller handles user login, validates input, checks user credentials, and returns a token and user data
+
+module.exports.getUserProfile = async (req, res, next) => { //get user profile controller
+ 
+    res.status(200).json(req.user); // Return the user profile from the request object
+    // This controller retrieves the user profile from the request object, which is set by the auth middleware
+}
+
+module.exports.logoutUser = async (req, res, next) => { //logout user controller 
+    // This controller handles user logout by clearing the authentication token cookie
+
+    res.clearCookie('token'); // Clear the authentication token cookie
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1]; // Get the token from cookies or headers
+
+    await blacklistTokenModel.create({ token }); // Add the token to the blacklist
+
+
+    res.status(200).json({ message: 'User logged out successfully' }); // Return a success message//
+
+
+} // End of logout user controller
