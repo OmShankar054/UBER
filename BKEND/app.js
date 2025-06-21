@@ -5,16 +5,19 @@ const express = require("express");
 const cors = require('cors'); //cors setup
 const app = express();//app variable create kiye. -- uske ander express ko call kia hua hai
 const connectToDb = require('./db/db'); //require database
+const userRoutes = require('./routes/user.routes'); //importing user routes
 
 connectToDb(); //call
 
 app.use(cors()); //cors use 
+app.use(express.json()); //to parse json data
+app.use(express.urlencoded({ extended: true })); //to parse urlencoded data
 
 
 
 app.get('/', (req, res) => { //route
     res.send("hello omsh");
 });
-
+app.use('/users', userRoutes); //use user routes
 
 module.exports = app;// app variable is being exported
