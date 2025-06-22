@@ -210,3 +210,4 @@ This endpoint logs out the authenticated user by clearing the authentication tok
 ### Status Codes
 - **200**: Logout successful.
 - **401**: Authentication failed or token is missing/invalid.
+--------------------------------------------------------------------------------------------------------------------------------------------------
