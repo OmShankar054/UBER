@@ -210,4 +210,98 @@ This endpoint logs out the authenticated user by clearing the authentication tok
 ### Status Codes
 - **200**: Logout successful.
 - **401**: Authentication failed or token is missing/invalid.
---------------------------------------------------------------------------------------------------------------------------------------------------
+______________________________________________________________________________________--------------------------------------------------------------------------------------
+
+# Captain Registration API
+
+## Register Captain
+
+**POST** `/captains/register`
+
+### Description
+This endpoint allows a new captain (driver) to register by providing their personal and vehicle details. The input is validated and a new captain is created in the database.
+
+### Request Body
+The request body must be in JSON format and include the following fields:
+
+- `fullname`: An object containing:
+  - `firstname`: A string (required, minimum 3 characters)
+  - `lastname`: A string (required, minimum 3 characters)
+- `email`: A string (required, valid email format)
+- `password`: A string (required, minimum 6 characters)
+- `vehicle`: An object containing:
+  - `color`: A string (required, minimum 3 characters)
+  - `plate`: A string (required, minimum 3 characters)
+  - `capacity`: An integer (required, minimum 1)
+  - `vehicleType`: A string (required, one of: `car`, `motorcycle`, `auto`)
+
+#### Example
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Smith"
+  },
+  "email": "jane.smith@example.com",
+  "password": "captainpass",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ1234",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Responses
+
+- **201 Created**
+  ```json
+  {
+    "captain": {
+      "_id": "CAPTAIN_ID",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Smith"
+      },
+      "email": "jane.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "XYZ1234",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "status": "inactive"
+    },
+    "token": "JWT_TOKEN"
+  }
+  ```
+- **400 Bad Request**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "First name must be at least 3 characters long",
+        "param": "fullname.firstname",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+  or
+  ```json
+  {
+    "error": "Captain already exists"
+  }
+  ```
+
+### Status Codes
+- **201**: Captain created successfully.
+- **400**: Validation errors in the request body or captain already exists.
+
+---
+
+> **Note:**  
+> Additional endpoints for captain login, profile, or logout are not present in the provided code.  
+> Authentication for captain endpoints should be handled similarly to user endpoints if implemented.
+

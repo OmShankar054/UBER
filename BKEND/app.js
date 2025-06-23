@@ -6,6 +6,7 @@ const app = express();//app variable create kiye. -- uske ander express ko call 
 const cookieParser = require('cookie-parser'); //cookie parser for cookies
 const connectToDb = require('./db/db'); //require database
 const userRoutes = require('./routes/user.routes'); //importing user routes
+const captainRoutes = require('./routes/captain.routes'); //importing captain routes
 
 connectToDb(); //call
 
@@ -20,5 +21,6 @@ app.get('/', (req, res) => { //route
     res.send("hello omsh");
 });
 app.use('/users', userRoutes); //use user routes
+app.use('/captains', captainRoutes); //use captain routes
 
 module.exports = app;// app variable is being exported
