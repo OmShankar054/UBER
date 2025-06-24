@@ -3,6 +3,7 @@ const captainController = require('../controllers/captain.controller');  // Impo
 const express = require('express');  // Import the express module
 const router = express.Router();  // Create a new router object
 const { body } = require('express-validator');  // Import body validation from express-validator
+const authMiddleware = require('../middlewres/auth.middlewares');  // Import authentication middleware
 
 router.post('/register', [  // Validate the request body for captain registration 
  
@@ -16,7 +17,16 @@ router.post('/register', [  // Validate the request body for captain registratio
 ],
     captainController.registerCaptain  // Call the registerCaptain method from the captain controller
 
-);
+)
+
+router.post('/login', [  // Validate the request body for captain login
+    body('email').isEmail().withMessage('Invalid Email'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+],
+    captainController.loginCaptain  // Call the loginCaptain method from the captain controller
+)
+
+router.get('/profile', authMiddleware.authCaptain, captainController.getCaptainProfile);  // Get the captain's profile, requires authentication
 
 
 

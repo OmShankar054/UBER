@@ -212,14 +212,14 @@ This endpoint logs out the authenticated user by clearing the authentication tok
 - **401**: Authentication failed or token is missing/invalid.
 ______________________________________________________________________________________--------------------------------------------------------------------------------------
 
-# Captain Registration API
+# Captain API Documentation
 
 ## Register Captain
 
 **POST** `/captains/register`
 
 ### Description
-This endpoint allows a new captain (driver) to register by providing their personal and vehicle details. The input is validated and a new captain is created in the database.
+Register a new captain (driver) by providing personal and vehicle details. Validates input and creates a new captain in the database.
 
 ### Request Body
 The request body must be in JSON format and include the following fields:
@@ -252,6 +252,14 @@ The request body must be in JSON format and include the following fields:
   }
 }
 ```
+- `fullname.firstname`: string, required, min 3 chars
+- `fullname.lastname`: string, required, min 3 chars
+- `email`: string, required, valid email
+- `password`: string, required, min 6 chars
+- `vehicle.color`: string, required, min 3 chars
+- `vehicle.plate`: string, required, min 3 chars
+- `vehicle.capacity`: integer, required, min 1
+- `vehicle.vehicleType`: string, required, one of `car`, `motorcycle`, `auto`
 
 ### Responses
 
@@ -260,10 +268,7 @@ The request body must be in JSON format and include the following fields:
   {
     "captain": {
       "_id": "CAPTAIN_ID",
-      "fullname": {
-        "firstname": "Jane",
-        "lastname": "Smith"
-      },
+      "fullname": { "firstname": "Jane", "lastname": "Smith" },
       "email": "jane.smith@example.com",
       "vehicle": {
         "color": "Red",
@@ -301,7 +306,137 @@ The request body must be in JSON format and include the following fields:
 
 ---
 
-> **Note:**  
-> Additional endpoints for captain login, profile, or logout are not present in the provided code.  
-> Authentication for captain endpoints should be handled similarly to user endpoints if implemented.
+## Login Captain
+
+**POST** `/captains/login`
+
+### Description
+Login as a captain using email and password. Returns a JWT token on success.
+
+### Request Body
+The request body must be in JSON format and include:
+
+- `email`: A string (required, valid email format)
+- `password`: A string (required, minimum 6 characters)
+
+#### Example
+```json
+{
+  "email": "jane.smith@example.com",
+  "password": "captainpass"
+}
+```
+- `email`: string, required, valid email
+- `password`: string, required, min 6 chars
+
+### Responses
+
+- **200 OK**
+  ```json
+  {
+    "captain": {
+      "_id": "CAPTAIN_ID",
+      "fullname": { "firstname": "Jane", "lastname": "Smith" },
+      "email": "jane.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "XYZ1234",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "status": "inactive"
+    },
+    "token": "JWT_TOKEN"
+  }
+  ```
+- **400 Bad Request**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  {
+    "error": "Invalid email or password"
+  }
+  ```
+
+### Status Codes
+- **200**: Login successful.
+- **400**: Validation errors in the request body.
+- **401**: Invalid email or password.
+
+---
+
+## Get Captain Profile
+
+**GET** `/captains/profile`
+
+### Description
+Returns the authenticated captain's profile. Requires a valid JWT token in the cookie or `Authorization` header.
+
+### Headers
+- `Cookie: token=JWT_TOKEN`  
+  or  
+- `Authorization: Bearer JWT_TOKEN`
+
+### Responses
+
+- **200 OK**
+  ```json
+  {
+    "captain": {
+      "_id": "CAPTAIN_ID",
+      "fullname": { "firstname": "Jane", "lastname": "Smith" },
+      "email": "jane.smith@example.com",
+      "vehicle": {
+        "color": "Red",
+        "plate": "XYZ1234",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "status": "inactive"
+    }
+  }
+  ```
+- **401 Unauthorized**
+  ```json
+  { "message": "Unauthorized" }
+  ```
+
+---
+
+## Logout Captain
+
+**GET** `/captains/logout`
+
+### Description
+Logs out the authenticated captain by blacklisting the token and clearing the cookie. Requires a valid JWT token.
+
+### Headers
+- `Cookie: token=JWT_TOKEN`  
+  or  
+- `Authorization: Bearer JWT_TOKEN`
+
+### Responses
+
+- **200 OK**
+  ```json
+  { "message": "Logout successfully" }
+  ```
+- **401 Unauthorized**
+  ```json
+  { "message": "Unauthorized" }
+  ```
+
+---
+
+> **Note:** All captain endpoints require proper validation and authentication as described above.
 
