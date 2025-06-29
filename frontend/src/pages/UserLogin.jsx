@@ -8,15 +8,15 @@ const UserLogin = () => {
 
 	
 
-	const submitHandler= (e)=>{
-		e.preventDefault()
-		setUserData({
+	const submitHandler= (e)=>{  // handle form submission
+		e.preventDefault()   // prevent default form submission behavior
+		setUserData({  
 		 email:email,
 		 password:password
 		})
 		console.log(userData)
-		setEmail('')
-		setPassword('')
+		setEmail('')          // reset email input field
+		setPassword('')       // reset password input field
 	}
 
 
@@ -61,7 +61,7 @@ const UserLogin = () => {
 		</div>
 
 		<div>
-			<button className='bg-[#10b461] text-white font-semibold mb-7 rounded py-2 px-4 w-full text-lg placeholder:text-base'>Sign in as captain </button>
+			<Link to='/captain-login' className='bg-[#10b461] flex items-center justify-center mb-5 text-white font-semibold mb-7 rounded py-2 px-4 w-full text-lg placeholder:text-base'>Sign in as captain </Link>
 		</div>
 	</div>
   );
