@@ -12,7 +12,7 @@ function CaptainSignup() {
   const submitHandler = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     setUserData({
-      captainName: {
+      fullName: {
         firstName: firstName,
         lastName: lastName
       },

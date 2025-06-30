@@ -11,7 +11,7 @@ const UserSignup = () => {
   const submitHandler = (e) => {  // Function to handle form submission
 	e.preventDefault();  // Prevent default form submission behavior
 	setUserData({  // Set user data state with form values
-		username:{
+		fullName:{
 			firstName: firstName,
 			lastName: lastName
 		},

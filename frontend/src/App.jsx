@@ -6,7 +6,9 @@ import UserSignup from './pages/UserSignup';
 import CaptainLogin from './pages/CaptainLogin';
 import CaptainSignup from './pages/CaptainSignup';
 
+
 const App = () => {
+ 
   return (
 	<div >
 	   <Routes>

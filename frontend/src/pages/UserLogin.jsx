@@ -52,6 +52,7 @@ const UserLogin = () => {
 			 className='bg-[#eeeeee] mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base' 
 			 type="password" 
 			 placeholder='your password'
+			 autocomplete="current-password"
 			/>
 
 			<button className='bg-[#111] text-white font-semibold mb-3 rounded py-2 px-4 w-full text-lg placeholder:text-base'>Login</button>
