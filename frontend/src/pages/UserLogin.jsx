@@ -54,6 +54,7 @@ const UserLogin = () => {
 			 className='bg-[#eeeeee] mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
 			 type="email" 
 			 placeholder='your email@example.com'
+			 autoComplete="email"
 			/>
 
 			<h3 className='text-lg font-medium mb-2'>Write your password</h3>
@@ -67,7 +68,7 @@ const UserLogin = () => {
 			 className='bg-[#eeeeee] mb-7 rounded px-4 py-2 border w-full text-lg placeholder:text-base' 
 			 type="password" 
 			 placeholder='your password'
-			 autocomplete="current-password"
+			 autoComplete="current-password"
 			/>
 
 			<button className='bg-[#111] text-white font-semibold mb-3 rounded py-2 px-4 w-full text-lg placeholder:text-base'>Login</button>
