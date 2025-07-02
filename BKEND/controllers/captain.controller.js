@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 const blackListTokenModel = require('../models/blacklistToken.model'); // Import the blacklist token model to manage blacklisted tokens
 
 
-module.exports.registerCaptain = async (req, res) => {  // Controller method to register a new captain
+module.exports.registerCaptain = async (req, res, next ) => {  // Controller method to register a new captain
 
     const errors = validationResult(req); // Validate the request body using express-validator
     if (!errors.isEmpty()) {
@@ -21,6 +21,7 @@ module.exports.registerCaptain = async (req, res) => {  // Controller method to 
     const hashedPassword = await captainModel.hashPassword(password); // Hash the password using the model's method
 
     const captain = await captainService.createCaptain({
+        
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,
