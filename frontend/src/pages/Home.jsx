@@ -2,12 +2,14 @@ import React, { useRef, useState } from "react";
 import {useGSAP} from '@gsap/react'
 import gsap from "gsap";
 import { Link } from "react-router-dom";
+ import 'remixicon/fonts/remixicon.css'
 
 const Home = () => {
      const [pickup, setPickup] = useState("");
      const [destination, setDestination] = useState("");
      const [panelOpen, setPanelOpen] = useState(false);
      const panelRef = useRef(null)
+     const panelCloseRef = useRef(null)
 
     const submitHandler = (e) => {
        
@@ -20,9 +22,18 @@ const Home = () => {
         gsap.to(panelRef.current, {
             height: '50%'
         })
-    }else{
+        gsap.to(panelCloseRef.current, {
+            opacity: 1,
+            duration: 0.5
+        })
+    } else {
         gsap.to(panelRef.current, {
             height: '0%'
+        })
+
+        gsap.to(panelCloseRef.current, {
+            opacity: 0,
+            duration: 0.5
         })
     }
 
@@ -39,12 +50,18 @@ const Home = () => {
 
             <div className="flex flex-col justify-end h-screen absolute top-0 w-full">
                    <div className="h-[30%] p-5 bg-white relative">
-                     <h4 className="text-3xl font-semibold">Find a Trip</h4>
+                    <h5 ref={panelCloseRef} onClick={() => {
+                         setPanelOpen(false)} 
+                    } className="absolute opacity-0 top-3 right-7 text-3xl ">
+                        <i className="ri-arrow-down-wide-line"></i>   {/* This icon indicates the panel can be closed */}
+                    </h5>
+
+                     <h4 className="text-3xl font-semibold ">Find a Trip</h4>
                         <form onSubmit={(e) => {
                             submitHandler(e)
                             }} > 
 
-                          <div className="line absolute h-20 w-1 top-[36%] left-10 bg-gray-900 rounded-full "></div>
+                          <div className="line absolute h-20 w-2 top-[36%] left-10 bg-gray-900 rounded-full "></div>
                           <input
                             onClick={() => {
                                setPanelOpen(true)
@@ -75,7 +92,7 @@ const Home = () => {
                         </form>
                    </div>
 
-                   <div ref={panelRef} className=" bg-red-400 h-0">
+                   <div ref={panelRef} className="opacity-1 bg-red-400 h-0">
                    </div>
 
 
