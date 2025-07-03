@@ -3,6 +3,7 @@ import {useGSAP} from '@gsap/react'
 import gsap from "gsap";
 import { Link } from "react-router-dom";
  import 'remixicon/fonts/remixicon.css'
+import LocationSearchPanel from "../components/LocationSearchPanel";
 
 const Home = () => {
      const [pickup, setPickup] = useState("");
@@ -20,15 +21,18 @@ const Home = () => {
     useGSAP( function(){  // GSAP animations can be added here
      if(panelOpen){
         gsap.to(panelRef.current, {
-            height: '50%'
+            height: '60%',
+            padding:20
         })
         gsap.to(panelCloseRef.current, {
             opacity: 1,
-            duration: 0.5
+            duration: 0.5,
+            
         })
     } else {
         gsap.to(panelRef.current, {
-            height: '0%'
+            height: '0%',
+            padding: 0
         })
 
         gsap.to(panelCloseRef.current, {
@@ -40,7 +44,7 @@ const Home = () => {
     }, [panelOpen])
 
     return (
-        <div className="h-screen relative">
+        <div className="h-screen relative overflow-hidden ">
             <img className="w-20 absolute left-5 top-5" src="https://imgs.search.brave.com/iUu_pSUB4XC14yY3lkGujRPUI3q11j4kizg-ipgasO8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/bG9nb3BuZy5jb20v/aW1hZ2VzL2FsbF9p/bWcvMTY1OTc2ODc3/OXViZXItbG9nby13/aGl0ZS5wbmc" alt="Logo" />
 
             <div className=" h-screen w-screen">
@@ -49,7 +53,7 @@ const Home = () => {
             </div>
 
             <div className="flex flex-col justify-end h-screen absolute top-0 w-full">
-                   <div className="h-[30%] p-5 bg-white relative">
+                   <div className="h-[30%] p-5 bg-white relative  ">
                     <h5 ref={panelCloseRef} onClick={() => {
                          setPanelOpen(false)} 
                     } className="absolute opacity-0 top-3 right-7 text-3xl ">
@@ -61,7 +65,7 @@ const Home = () => {
                             submitHandler(e)
                             }} > 
 
-                          <div className="line absolute h-20 w-2 top-[36%] left-10 bg-gray-900 rounded-full "></div>
+                          <div className="line absolute h-20 w-2 top-[46%] left-11 bg-gray-900 rounded-full "></div>
                           <input
                             onClick={() => {
                                setPanelOpen(true)
@@ -92,11 +96,59 @@ const Home = () => {
                         </form>
                    </div>
 
-                   <div ref={panelRef} className="opacity-1 bg-red-400 h-0">
+                   <div ref={panelRef} className=" bg-white h-0">
+                         <LocationSearchPanel />
                    </div>
 
 
                    
+            </div>
+
+            <div className="fixed z-10 bottom-0 bg-white p-3 w-full px-3 py-6">
+                 <h3 className="text-2xl font-semibold mb-5">Select a Vehicle</h3>
+
+                <div className="flex border-2 border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
+                    <img
+                      className="h-11"
+                        src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png"
+                      alt="car"
+                    />
+                    <div className="ml-4 w-1/2">
+                      <h4 className="font-medium text-base">AutoGo <span><i className="ri-user-5-fill"></i> 2</span></h4>
+                      <h5 className="font-medium text-sm">4 mins away</h5>
+                      <p className="font-normal text-xs">Affordable</p>
+                    </div>
+                    <h2 className="text-xl font-semibold">₹120.59</h2>
+                </div>
+
+                <div className="flex border-2 border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
+                    <img
+                      className="h-11"
+                        src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png"
+                      alt="auto"
+                    />
+                    <div className="ml-4 w-1/2">
+                      <h4 className="font-medium text-base">MotoGo <span><i className="ri-user-5-fill"></i> 1</span></h4>
+                      <h5 className="font-medium text-sm">2 mins away</h5>
+                      <p className="font-normal text-xs">Affordable and safe rides</p>
+                    </div>
+                    <h2 className="text-xl font-semibold">₹40.00</h2>
+                </div>
+
+                <div className="flex border-2 border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
+                    <img
+                      className="h-11"
+                        src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png"
+                      alt="bike"
+                    />
+                    <div className="ml-4 w-1/2">
+                      <h4 className="font-medium text-base">UberGo <span><i className="ri-user-5-fill"></i> 4</span></h4>
+                      <h5 className="font-medium text-sm">5 mins away</h5>
+                      <p className="font-normal text-xs">Affordable, safe rides</p>
+                    </div>
+                    <h2 className="text-xl font-semibold">₹55.73</h2>
+                </div>
+
             </div>
 
 
