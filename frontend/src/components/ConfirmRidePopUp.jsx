@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ConfirmRidePopUp = (props) => {
   return (
      
-        <div > 
+    <div > 
         <h5 className= "p-1 text-center w-[90%] absolute top-0 cursor-pointer" onClick ={() => {
                 props.setRidePopupPanel(false)
             }}> <i className=" text-3xl text-red-600 ri-arrow-down-wide-line"></i> </h5>
 
-            <h3 className="text-2xl font-semibold mb-5">New Ride Available! </h3>
+            <h3 className="text-2xl font-semibold mb-5"> Confirm this Ride to Start! </h3>
             <div className='flex items-center justify-between p-3 bg-orange-300 rounded-lg mt-4 ' >
                 <div className='flex item-center gap-2  ' >
                     <img className='h-12 rounded-full object-cover w-12' src=" https://imgs.search.brave.com/YA4xXdvopDoSH6OA0iQGizeKTEYvJkooZMVfcdZgyNE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maWxl/LmFpcXVpY2tkcmF3/LmNvbS9pbWdjb21w/cmVzc2VkL2ltZy9j/b21wcmVzc2VkXzk0/OGQ4NGYxZGFlMjVl/ZDY0YzE4ZWY3NDA1/ZTUzMTNiLndlYnA" alt="customer" />
@@ -48,13 +49,19 @@ const ConfirmRidePopUp = (props) => {
               </div>
 
             
-                <button onClick={()=>{
-                     
-                }} className ='w-full mt-1 bg-green-800 text-white font-semibold p-2 rounded-lg ' >Confirm</button>
+                <div className='mt-6 w-full'>
+                    <form onSubmit={(e) => {
+                     submitHandler(e)
+                     }}>
+                    <input type="text" className='bg-[#eee] px-4 py-4 font-mono text-lg rounded-lg w-full mt-3 mb-3 ' placeholder='Enter OTP' />
+                     <Link to='/captain-riding' className ='w-full mt-1 flex justify-center bg-green-800 text-white font-semibold p-2 rounded-lg ' >Confirm</Link>
 
                 <button onClick={()=>{
+                    props.setConfirmRidePopupPanel(false)
                     props.setRidePopupPanel(false)
-                }} className ='w-full mt-1 bg-gray-300 text-gray-800 font-semibold p-2 rounded-lg ' >Ignore</button>
+                }} className ='w-full mt-1 bg-red-600 text-white font-semibold p-2 rounded-lg ' >Cancel Ride</button>
+                   </form>
+                </div>
             
             </div>
     </div>
