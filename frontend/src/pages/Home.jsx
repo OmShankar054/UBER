@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {useGSAP} from '@gsap/react'
 import gsap from "gsap";
+import axios from 'axios';
 import { Link } from "react-router-dom";
  import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from "../components/LocationSearchPanel";
@@ -8,6 +9,12 @@ import VehiclePanel from "../components/vehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
+import { SocketContext } from '../context/SocketContext';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import {UserDataContext} from '../context/UserContext'
+import LiveTracking from "../components/LiveTracking";
+
 
 const Home = () => {
      const [pickup, setPickup] = useState("");
@@ -17,13 +24,75 @@ const Home = () => {
      const ConfirmRidePanelRef = useRef(null)
      const vehicleFoundRef = useRef(null)
      const waitingForDriverRef = useRef(null)
-
      const panelRef = useRef(null)
-     const panelCloseRef = useRef(null)     
-     const [vehiclePanel, setVehiclePanel ] = useState(false) 
-     const [confirmRidePanel, setConfirmRidePanel]= useState(false) 
-     const [vehicleFound, setVehicleFound] = useState(false)
-     const [waitingForDriver, setWaitingForDriver] = useState(false)
+      const panelCloseRef = useRef(null)
+      const [ vehiclePanel, setVehiclePanel ] = useState(false)
+      const [ confirmRidePanel, setConfirmRidePanel ] = useState(false)
+      const [ vehicleFound, setVehicleFound ] = useState(false)
+      const [ waitingForDriver, setWaitingForDriver ] = useState(false)
+      const [ pickupSuggestions, setPickupSuggestions ] = useState([])
+      const [ destinationSuggestions, setDestinationSuggestions ] = useState([])
+      const [ activeField, setActiveField ] = useState(null)
+      const [ fare, setFare ] = useState({})
+      const [ vehicleType, setVehicleType ] = useState(null)
+      const [ ride, setRide ] = useState(null)
+
+      const navigate = useNavigate()
+
+      const { socket } = useContext(SocketContext)
+      const { user } = useContext(UserDataContext)
+
+      useEffect(() => {
+        socket.emit("join", { userType: "user", userId: user._id })
+      }, [ user ])
+
+      socket.on('ride-confirmed', ride => {
+
+
+        setVehicleFound(false)
+        setWaitingForDriver(true)
+        setRide(ride)
+    })
+
+      socket.on('ride-started', ride => {
+          console.log("ride")
+          setWaitingForDriver(false)
+          navigate('/riding', { state: { ride } }) // Updated navigate to include ride data
+      })
+
+
+     
+
+       const handlePickupChange = async (e) => {
+        setPickup(e.target.value)
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+                params: { input: e.target.value },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+
+            })
+            setPickupSuggestions(response.data)
+        } catch {
+            // handle error
+        }
+    }
+
+    const handleDestinationChange = async (e) => {
+        setDestination(e.target.value)
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+                params: { input: e.target.value },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            setDestinationSuggestions(response.data)
+        } catch {
+            // handle error
+        }
+    }
 
     const submitHandler = (e) => { 
         e.preventDefault(); // Prevent the default form submission behavior

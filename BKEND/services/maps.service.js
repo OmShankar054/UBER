@@ -1,97 +1,92 @@
-
-
-const axios = require('axios');  //using google maps => change to tomtom not done
+const axios = require('axios');
+const captainModel = require('../models/captain.model');
 
 module.exports.getAddressCoordinate = async (address) => {
-      const apiKey = process.env.TOMTOM_API_KEY; //changed for tomtom api
-      const url = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(address)}.json?key=${apiKey}`;
-     
+    const apiKey = process.env.GOOGLE_MAPS_API;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+
     try {
         const response = await axios.get(url);
-
-        if (
-            response.data &&                            //changed for tomtoma api
-            response.data.results &&                    //changed for tomtoma api
-            response.data.results.length > 0            //changed for tomtoma api
-        ) {
-            const position = response.data.results[0].position;
+        if (response.data.status === 'OK') {
+            const location = response.data.results[ 0 ].geometry.location;
             return {
-                lat: position.lat,
-                lng: position.lon
+                ltd: location.lat,
+                lng: location.lng
             };
         } else {
             throw new Error('Unable to fetch coordinates');
         }
     } catch (error) {
-        console.error('Geocoding Error:', error.message);
+        console.error(error);
         throw error;
     }
-};
+}
 
-
-module.exports.getDistanceTime = async (origin, destination) => {  //to get distance&time between two points
+module.exports.getDistanceTime = async (origin, destination) => {
     if (!origin || !destination) {
-        throw new Error('Origin and Destination are required');
+        throw new Error('Origin and destination are required');
     }
 
-    const apiKey = process.env.TOMTOM_API_KEY;
+    const apiKey = process.env.GOOGLE_MAPS_API;
 
-    //  Construct URL for TomTom Routing API
-    const url = `https://api.tomtom.com/routing/1/calculateRoute/${encodeURIComponent(origin)}:${encodeURIComponent(destination)}/json?key=${apiKey}&travelMode=car`;
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}&key=${apiKey}`;
 
     try {
+
+
         const response = await axios.get(url);
+        if (response.data.status === 'OK') {
 
-        //  TomTom does not return `status: OK`, so we validate response differently
-        if (
-            response.data &&
-            response.data.routes &&
-            response.data.routes.length > 0
-        ) {
-            const summary = response.data.routes[0].summary;
+            if (response.data.rows[ 0 ].elements[ 0 ].status === 'ZERO_RESULTS') {
+                throw new Error('No routes found');
+            }
 
-            return {
-                distanceInMeters: summary.lengthInMeters,
-                travelTimeInSeconds: summary.travelTimeInSeconds,
-                trafficTimeInSeconds: summary.trafficTravelTimeInSeconds // optional
-            };
+            return response.data.rows[ 0 ].elements[ 0 ];
         } else {
-            throw new Error('No routes found');
+            throw new Error('Unable to fetch distance and time');
         }
+
     } catch (err) {
-        console.error('TomTom Routing Error:', err.message);
+        console.error(err);
         throw err;
     }
-};
+}
 
- 
 module.exports.getAutoCompleteSuggestions = async (input) => {
     if (!input) {
-        throw new Error('Query is required');
+        throw new Error('query is required');
     }
 
-    const apiKey = process.env.TOMTOM_API_KEY;
-    const url = `https://api.tomtom.com/search/2/autocomplete/${encodeURIComponent(input)}.json?key=${apiKey}&limit=5`;
+    const apiKey = process.env.GOOGLE_MAPS_API;
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&key=${apiKey}`;
 
     try {
         const response = await axios.get(url);
-
-        if (
-            response.data &&
-            response.data.results &&
-            response.data.results.length > 0
-        ) {
-            // Return suggestions (you can format as needed)
-            return response.data.results.map(result => ({
-                address: result.address.freeformAddress,
-                position: result.position
-            }));
+        if (response.data.status === 'OK') {
+            return response.data.predictions.map(prediction => prediction.description).filter(value => value);
         } else {
-            throw new Error('No autocomplete results found');
+            throw new Error('Unable to fetch suggestions');
         }
     } catch (err) {
-        console.error('TomTom Autocomplete Error:', err.message);
+        console.error(err);
         throw err;
     }
-};
+}
 
+module.exports.getCaptainsInTheRadius = async (ltd, lng, radius) => {
+
+    // radius in km
+
+
+    const captains = await captainModel.find({
+        location: {
+            $geoWithin: {
+                $centerSphere: [ [ ltd, lng ], radius / 6371 ]
+            }
+        }
+    });
+
+    return captains;
+
+
+}
