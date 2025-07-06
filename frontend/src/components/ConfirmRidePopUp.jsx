@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 const ConfirmRidePopUp = (props) => {
+
+    const [otp, setOtp] = useState('')
+
+    const submitHandler = (e) =>{
+        e.preventDefault()  /* If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.*/
+    }
   return (
      
     <div > 
@@ -53,7 +60,9 @@ const ConfirmRidePopUp = (props) => {
                     <form onSubmit={(e) => {
                      submitHandler(e)
                      }}>
-                    <input type="text" className='bg-[#eee] px-4 py-4 font-mono text-lg rounded-lg w-full mt-3 mb-3 ' placeholder='Enter OTP' />
+
+                    <input value={otp} onChange={(e)=>setOtp(e.target.value)} type="text" className='bg-[#eee] px-4 py-4 font-mono text-lg rounded-lg w-full mt-3 mb-3 ' placeholder='Enter OTP' />
+
                      <Link to='/captain-riding' className ='w-full mt-1 flex justify-center bg-green-800 text-white font-semibold p-2 rounded-lg ' >Confirm</Link>
 
                 <button onClick={()=>{

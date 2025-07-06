@@ -5,11 +5,11 @@ const FinishRide = (props) => {
   return (
       <div > 
         <h5 className= "p-1 text-center w-[90%] absolute top-0 cursor-pointer" onClick ={() => {
-                props.setRidePopupPanel(false)
+                props. setFinishRidePanel(false)
             }}> <i className=" text-3xl text-red-600 ri-arrow-down-wide-line"></i> </h5>
 
-            <h3 className="text-2xl font-semibold mb-5"> Confirm this Ride to Start! </h3>
-            <div className='flex items-center justify-between p-3 bg-orange-300 rounded-lg mt-4 ' >
+            <h3 className="text-2xl font-semibold mb-5"> Finished this Ride </h3>
+            <div className='flex items-center justify-between p-4 border-4 border-yellow-400 bg-orange-100  rounded-lg mt-4 ' >
                 <div className='flex item-center gap-2  ' >
                     <img className='h-12 rounded-full object-cover w-12' src=" https://imgs.search.brave.com/YA4xXdvopDoSH6OA0iQGizeKTEYvJkooZMVfcdZgyNE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maWxl/LmFpcXVpY2tkcmF3/LmNvbS9pbWdjb21w/cmVzc2VkL2ltZy9j/b21wcmVzc2VkXzk0/OGQ4NGYxZGFlMjVl/ZDY0YzE4ZWY3NDA1/ZTUzMTNiLndlYnA" alt="customer" />
                     <h5 className='text-lg font-medium mt-2.5 '>Customer's name</h5>
@@ -49,7 +49,8 @@ const FinishRide = (props) => {
 
             
                 <div className='mt-6 w-full'>
-                     <Link to='/captain-riding' className ='w-full mt-1 flex justify-center bg-green-800 text-white font-semibold p-2 rounded-lg ' >Complete Ride </Link>               
+                     <Link to='/captain-home' className ='w-full mt-1 flex justify-center bg-green-800 text-white font-semibold p-2 rounded-lg ' > Ride Completed </Link>   
+                      <p className='text-red-900 bg-gray-50 font-bold mt-2 text-xs pl-2   '>Click on Ride Completed only after receiving the payment.</p>            
                 </div>
             
             </div>
