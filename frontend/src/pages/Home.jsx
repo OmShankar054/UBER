@@ -9,7 +9,7 @@ import VehiclePanel from "../components/vehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
-//import { SocketContext } from '../context/SocketContext';
+import { SocketContext } from '../context/SocketContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import {UserDataContext} from '../context/UserContext'
@@ -38,8 +38,29 @@ const Home = () => {
       const [ vehicleType, setVehicleType ] = useState(null)
       const [ ride, setRide ] = useState(null)
 
-     // const navigate = useNavigate()
+      const navigate = useNavigate()
 
+          const { socket } = useContext(SocketContext)
+          const { user } = useContext(UserDataContext)
+
+              useEffect(() => {
+                
+                  socket.emit("join", { userType: "user", userId: user._id })
+              }, [ user ])
+
+              socket.on('ride-confirmed', ride => {
+
+
+                  setVehicleFound(false)
+                  setWaitingForDriver(true)
+                  setRide(ride)
+              })
+
+              socket.on('ride-started', ride => {
+                  console.log("ride")
+                  setWaitingForDriver(false)
+                  navigate('/riding', { state: { ride } }) // Updated navigate to include ride data
+              })
     
      
 

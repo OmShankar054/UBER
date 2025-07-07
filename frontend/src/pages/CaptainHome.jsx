@@ -6,15 +6,20 @@ import RidePopUp from '../components/RidePopUp'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
+import { useEffect, useContext } from 'react'
+import { SocketContext } from '../context/SocketContext'
+import { CaptainDataContext } from '../context/CaptainContext'
+import axios from 'axios'
 
 const CaptainHome = () => {
-
-
   const [ridePopupPanel, setRidePopupPanel] = useState(true)
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false)
 
   const ridePopupPanelRef = useRef(null)
   const confirmRidePopupPanelRef = useRef(null)
+
+   const { socket } = useContext(SocketContext)
+   const { captain } = useContext(CaptainDataContext)
 
    useGSAP( function() {
       if(  ridePopupPanel  ){
@@ -57,9 +62,10 @@ const CaptainHome = () => {
             <img className='h-full w-full object-cover' src=" https://images.unsplash.com/photo-1608878746376-b65933cb0079?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
         </div>
 
-        <div className='h-2/5 p-6 '>  {/* */}
+          <div className='h-2/5 p-6 '>  {/* */}
             <CaptainDetails/>
-      </div>
+         </div>
+
 
       <div ref={ridePopupPanelRef} className='fixed w-full z-10 translate-y-full bottom-0 bg-white px-3 py-10 pt-12'>
         < RidePopUp setRidePopupPanel= {setRidePopupPanel} setConfirmRidePopupPanel= {setConfirmRidePopupPanel} />

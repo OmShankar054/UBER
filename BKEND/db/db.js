@@ -1,12 +1,16 @@
-const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 
-
-function connectToDb() { //basic function to connect to the database-
-    mongoose.connect(process.env.DB_CONNECT,   
-    ).then(() => {
-        console.log('Connect to DB');
-    }).catch(err => console.log(err));
-    
+async function connectToDb() {
+  try {
+    await mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/uber', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(' MongoDB connected successfully');
+  } catch (err) {
+    console.error('❌ MongoDB connection failed:', err.message);
+    process.exit(1); // Optional: stop server if DB fails
+  }
 }
 
 module.exports = connectToDb;

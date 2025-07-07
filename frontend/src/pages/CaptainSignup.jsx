@@ -44,6 +44,10 @@ const CaptainSignup = () => {  // Component for Captain Signup page
       }
     }
 
+    console.log(" Captain Registration Payload:", captainData);
+
+   
+
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainData); // Sending POST request to server
     
     if (response.status === 201) { // If response is successful
