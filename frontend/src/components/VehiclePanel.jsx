@@ -10,6 +10,7 @@ const VehiclePanel = (props) => {
 
                 <div onClick={() => {
                     props.setConfirmRidePanel(true)
+                      props.selectVehicle('car')
                 }} className="flex border-2  active:border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
                     <img
                       className="h-11"
@@ -21,11 +22,12 @@ const VehiclePanel = (props) => {
                       <h5 className="font-medium text-sm">4 mins away</h5>
                       <p className="font-normal text-xs">Affordable</p>
                     </div>
-                    <h2 className="text-lg font-semibold">₹120.59</h2>
+                    <h2 className="text-lg font-semibold">{props.fare.car} </h2>
                 </div>
 
                 <div onClick={() => {
                     props.setConfirmRidePanel(true)
+                    props.selectVehicle('auto ')
                 }}className="flex border-2  active:border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
                     <img
                       className="h-11"
@@ -37,11 +39,12 @@ const VehiclePanel = (props) => {
                       <h5 className="font-medium text-sm">2 mins away</h5>
                       <p className="font-normal text-xs">Affordable and safe rides</p>
                     </div>
-                    <h2 className="text-lg font-semibold">₹40.00</h2>
+                    <h2 className="text-lg font-semibold"> {props.fare.auto}</h2>
                 </div>
 
                 <div onClick={() => {
                     props.setConfirmRidePanel(true)
+                       props.selectVehicle('moto')
                 }}className="flex border-2 active:border-black mb-2 rounded-xl items-center justify-between w-full p-3 ">
                     <img
                       className="h-11"
@@ -53,7 +56,7 @@ const VehiclePanel = (props) => {
                       <h5 className="font-medium text-sm">5 mins away</h5>
                       <p className="font-normal text-xs">Affordable, safe rides</p>
                     </div>
-                    <h2 className="text-lg font-semibold">₹55.73</h2>
+                    <h2 className="text-lg font-semibold"> {props.fare.moto}</h2>
                 </div>
     </div>
   )

@@ -8,7 +8,7 @@ const captainModel = require('../models/captain.model'); // Import the captain m
 
 module.exports.authUser = async (req, res, next) => { // Middleware function to authenticate the user
 
-    const token = res.cokkies.token || req.headers.authorization?.split(' ')[1]; // Get token from cookies or headers
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1]; // Get token from cookies or headers
     if (!token) {
         return res.status(401).json({ message: 'Authentication token is missing' }); // Unauthorized if token is missing so it gives 401 error
     } 
