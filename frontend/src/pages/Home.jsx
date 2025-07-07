@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import {UserDataContext} from '../context/UserContext'
 import LiveTracking from "../components/LiveTracking";
+ 
 
 
 
@@ -49,7 +50,6 @@ const Home = () => {
               }, [ user ])
 
               socket.on('ride-confirmed', ride => {
-
 
                   setVehicleFound(false)
                   setWaitingForDriver(true)
@@ -309,7 +309,12 @@ async function createRide() {
             </div>
 
             <div ref={waitingForDriverRef}  className="fixed w-full z-10 bottom-0  bg-white p-3 w-full px-3 py-10 pt-12">
-                 < WaitingForDriver  waitingForDriver={waitingForDriver}   />  
+                 < WaitingForDriver  
+                    ride={ride}
+                    setVehicleFound={setVehicleFound}
+                    setWaitingForDriver={setWaitingForDriver}
+                    waitingForDriver={waitingForDriver} />
+                      
             </div>
 
 

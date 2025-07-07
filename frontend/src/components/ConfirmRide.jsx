@@ -43,9 +43,14 @@ const ConfirmRide = (props) => {
             <div>
                 <button
                      onClick={() => {
+
+                      if (!props.createRide) {
+                        console.error("createRide function is not passed in props.");
+                        return;
+                       }
                        props.setVehicleFound(true);
                        props.setConfirmRidePanel(false);
-                      props.createRide(); // <-- THIS is the correct function to call
+                       props.createRide(); // <-- THIS is the correct function to call
                        }}
                         className='w-full mt-5 bg-green-800 text-white font-semibold p-2 rounded-lg'>
                         Confirm

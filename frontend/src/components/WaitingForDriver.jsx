@@ -21,8 +21,8 @@ const WaitingForDriver = (props) => {
         />
 
         <div className="text-right">
-          <h2 className="text-lg font-medium "> TestCap</h2>
-          <h4 className="text-xl font-semibold -mt-1 -mb-1">JH01 AW 1243</h4>
+          <h2 className="text-lg font-medium "> {props.ride?.captain.fullname.firstname} </h2>
+          <h4 className="text-xl font-semibold -mt-1 -mb-1"> {props.ride?.captain.vehicle.plate} </h4>
           <p className="test-sm text-gray-600">Maruiti Wagnor</p>
         </div>
       </div>
@@ -34,7 +34,7 @@ const WaitingForDriver = (props) => {
             {/* users current location */}
             <div>
               <h3 className="text-lg font-medium"> Road no-5b, Krishnapuri </h3>
-              <p className="text-sm   text-gray-800"> Chutia, Ranchi</p>
+              <p className="text-sm   text-gray-800">  {props.ride?.pickup}</p>
             </div>
           </div>
 
@@ -43,14 +43,14 @@ const WaitingForDriver = (props) => {
             {/* users final location */}
             <div>
               <h3 className="text-lg font-medium"> CIT, </h3>
-              <p className="text-sm   text-gray-800"> Tatisilwai, Ranchi </p>
+              <p className="text-sm   text-gray-800">  {props.ride?.destination} </p>
             </div>
           </div>
 
           <div className="flex item-center gap-6 p-3  ">
             <i className=" ri-money-rupee-circle-fill"></i> {/* money */}
             <div>
-              <h3 className="text-lg font-medium"> ₹120 </h3>
+              <h3 className="text-lg font-medium"> ₹{props.ride?.fare} </h3>
               <p className="text-sm   text-gray-800"> cash </p>
             </div>
           </div>

@@ -13,7 +13,7 @@ const rideRoutes = require('./routes/ride.routes')
 connectToDb(); //call
 
  app.use(cors({
-  origin: 'http://localhost:5173', // your frontend URL
+  origin: ['http://localhost:5173',  'https://lp3jqd61-5173.inc1.devtunnels.ms'], // your frontend URL
   credentials: true,
 })); 
 app.use(express.json()); //to parse json data
