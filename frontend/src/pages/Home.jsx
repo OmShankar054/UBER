@@ -274,7 +274,7 @@ async function createRide() {
                     destination={destination}
                     fare={fare}
                     vehicleType={vehicleType}
-                setConfirmRidePanel={setConfirmRidePanel }  setVehicleFound={setVehicleFound} />
+                  setConfirmRidePanel={setConfirmRidePanel }  setVehicleFound={setVehicleFound} />
             </div>
 
              <div ref={vehicleFoundRef} className="fixed w-full z-10 bottom-0 translate-y-full bg-white p-3 w-full px-3 py-10 pt-12">
