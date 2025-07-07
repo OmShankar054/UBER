@@ -35,6 +35,7 @@ const WaitingForDriver = (props) => {
             <div>
               <h3 className="text-lg font-medium"> Road no-5b, Krishnapuri </h3>
               <p className="text-sm   text-gray-800">  {props.ride?.pickup}</p>
+              <h1 className='text-lg font-semibold'>  {props.ride?.otp} </h1>
             </div>
           </div>
 

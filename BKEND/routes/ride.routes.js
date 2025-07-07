@@ -27,12 +27,12 @@ const authMiddleware = require('../middlewres/auth.middlewares');
                 rideController.confirmRide
             )
 
-            // router.get('/start-ride',
-            //     authMiddleware.authCaptain,
-            //     query('rideId').isMongoId().withMessage('Invalid ride id'),
-            //     query('otp').isString().isLength({ min: 6, max: 6 }).withMessage('Invalid OTP'),
-            //     rideController.startRide
-            // )
+             router.get('/start-ride',
+                 authMiddleware.authCaptain,
+                 query('rideId').isMongoId().withMessage('Invalid ride id'),
+                 query('otp').isString().isLength({ min: 6, max: 6 }).withMessage('Invalid OTP'),
+                 rideController.startRide
+             )
 
             // router.post('/end-ride',
             //     authMiddleware.authCaptain,

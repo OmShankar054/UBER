@@ -137,7 +137,7 @@ import axios from 'axios'
       </div>
 
       <div ref={ confirmRidePopupPanelRef} className='fixed w-full h-full z-10 translate-y-full bottom-0 bg-white px-3 py-10 pt-12'>
-        < ConfirmRidePopUp 
+        <ConfirmRidePopUp 
         ride={ride}
         setConfirmRidePopupPanel= {setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel} />
       </div>
