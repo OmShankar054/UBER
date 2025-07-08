@@ -3,6 +3,7 @@ import { Link, useLocation  } from 'react-router-dom'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import FinishRide from '../components/FinishRide'
+import LiveTracking from '../components/LiveTracking'
 
 const CaptainRiding = () => {
 
@@ -29,13 +30,15 @@ const CaptainRiding = () => {
 
        <div className='fixed p-6 top-1 flex items-center justify-between w-screen'>
         <img className='w-16' src="https://imgs.search.brave.com/iUu_pSUB4XC14yY3lkGujRPUI3q11j4kizg-ipgasO8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/bG9nb3BuZy5jb20v/aW1hZ2VzL2FsbF9p/bWcvMTY1OTc2ODc3/OXViZXItbG9nby13/aGl0ZS5wbmc" alt="" />
-         <Link to='/captain-home'  className=' h-10 w-10 bg-white flex items-center justify-center rounded-full'>
+        
+         <Link to='/captain-home' className=' top-4 left-4 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
             <i className="text-lg font-medium ri-logout-box-line  "></i>
         </Link>
        </div>
 
         <div className='h-4/5 '>
-            <img className='h-full w-full object-cover' src=" https://images.unsplash.com/photo-1608878746376-b65933cb0079?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+            {/* <img className='h-full w-full object-cover' src=" https://images.unsplash.com/photo-1608878746376-b65933cb0079?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" /> */}
+             <LiveTracking/>
         </div>
 
         <div className='h-1/5 p-6 flex items-center justify-between  relative bg-yellow-400 pt-10'  

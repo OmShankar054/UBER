@@ -217,7 +217,8 @@ async function createRide() {
 
             <div className=" h-screen w-screen">
                 {/* temporary image */}
-                <img className="w-full h-full object-cover" src=" https://images.unsplash.com/photo-1617721042495-04e739b9739d?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background" />
+               {/* <img className="w-full h-full object-cover" src=" https://images.unsplash.com/photo-1617721042495-04e739b9739d?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background" /> */}
+                <LiveTracking />
             </div>
 
             <div className="flex flex-col justify-end h-screen absolute top-0 w-full">

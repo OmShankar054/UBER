@@ -23,6 +23,7 @@ const Riding = () => {
             <i className="text-lg font-medium  ri-home-gear-line"></i>
         </Link>
         <div className='h-1/2 '>
+        
         <LiveTracking />
 
         <img className='h-full w-full object-cover' src=" https://images.unsplash.com/photo-1608878746376-b65933cb0079?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
