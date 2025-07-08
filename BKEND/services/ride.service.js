@@ -132,14 +132,14 @@ module.exports.startRide = async ({ rideId, otp, captain }) => {
     return ride;
 }
 
-module.exports.endRide = async ({ rideId, captain }) => {
+module.exports.endRide = async ({ rideId, captain }) => { //asks as an obj.
     if (!rideId) {
         throw new Error('Ride id is required');
     }
 
     const ride = await rideModel.findOne({
         _id: rideId,
-        captain: captain._id
+        captain: captain._id //checking for the captain, same as the one who accepted the ride
     }).populate('user').populate('captain').select('+otp');
 
     if (!ride) {
