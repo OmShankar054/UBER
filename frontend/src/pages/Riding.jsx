@@ -53,7 +53,7 @@ const Riding = () => {
             {/* users final location */}
             <div>
               <h3 className="text-lg font-medium">  {ride?.destination} </h3>
-              <p className="text-sm   text-gray-800"> Tatisilwai, Ranchi </p>
+              <p className="text-sm   text-gray-800"> {ride?.destination}  </p>
             </div>
           </div>
 

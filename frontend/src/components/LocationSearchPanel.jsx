@@ -9,10 +9,10 @@ const LocationSearchPanel = ({
   activeField
 }) => {
   const fallbackSuggestions = [
-    "23A, 1 Krishnapuri, road no- 5b, chutia, ranchi",
-    "24B, 2 Krishnapuri, road no- 5b, chutia, ranchi",
-    "25C, 3 Krishnapuri, road no- 5b, chutia, ranchi",
-    "26D, 4 Krishnapuri, road no- 5b, chutia, ranchi",
+    
+    " Birsa Munda Airport, Ranchi",
+    " CIT, Ranchi",
+    "26D, Krishnapuri, road no- 5b, Ranchi",
   ];
 
   const suggestionsToRender = suggestions.length > 0 ? suggestions : fallbackSuggestions;

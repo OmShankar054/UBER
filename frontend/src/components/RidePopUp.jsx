@@ -26,7 +26,7 @@ const RidePopUp = (props) => {
                     <i className="text-xl ri-map-pin-user-line"></i>  {/* users current location */}
                     <div>
                         <h3 className='text-lg font-medium'> {props.ride?.pickup} </h3>
-                         <p  className='text-sm   text-gray-800'> Chutia, Ranchi</p>
+                         <p  className='text-sm   text-gray-800'> Railway Station</p>
                     </div>
 
                 </div>
@@ -34,7 +34,7 @@ const RidePopUp = (props) => {
                       <i className="ri-map-pin-time-line"></i>  {/* users final location */}
                     <div>
                         <h3 className='text-lg font-medium'>   {props.ride?.destination } </h3>
-                         <p  className='text-sm   text-gray-800'> Tatisilwai, Ranchi </p>
+                         <p  className='text-sm   text-gray-800'> Airport, Ranchi </p>
                     </div>
                 </div>
 

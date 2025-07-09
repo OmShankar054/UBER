@@ -33,7 +33,7 @@ const WaitingForDriver = (props) => {
             <i className="text-xl ri-map-pin-user-line"></i>{" "}
             {/* users current location */}
             <div>
-              <h3 className="text-lg font-medium"> Road no-5b, Krishnapuri </h3>
+              <h3 className="text-lg font-medium">  {props.ride?.pickup} </h3>
               <p className="text-sm   text-gray-800">  {props.ride?.pickup}</p>
               <h1 className='text-lg font-semibold'>  {props.ride?.otp} </h1>
             </div>
@@ -43,7 +43,7 @@ const WaitingForDriver = (props) => {
             <i className="ri-map-pin-time-line"></i>{" "}
             {/* users final location */}
             <div>
-              <h3 className="text-lg font-medium"> CIT, </h3>
+              <h3 className="text-lg font-medium">  {props.ride?.destination} </h3>
               <p className="text-sm   text-gray-800">  {props.ride?.destination} </p>
             </div>
           </div>

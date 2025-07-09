@@ -33,6 +33,7 @@ const ConfirmRidePopUp = (props) => {
      
     <div > 
         <h5 className= "p-1 text-center w-[90%] absolute top-0 cursor-pointer" onClick ={() => {
+                props.setConfirmRidePopupPanel(false)
                 props.setRidePopupPanel(false)
             }}> <i className=" text-3xl text-red-600 ri-arrow-down-wide-line"></i> </h5>
 
@@ -51,23 +52,23 @@ const ConfirmRidePopUp = (props) => {
 
             <div className=' w-full mt-5 '>
                 <div className='flex item-center gap-6  p-3 border-b-2'  >  
-                    <i className="text-xl ri-map-pin-user-line"></i>  {/* users current location */}
+                    <i className="text-2xl ri-map-pin-user-line"></i>  {/* users current location */}
                     <div>
-                        <h3 className='text-lg font-medium'> Road no-5b, Krishnapuri </h3>
-                         <p  className='text-sm   text-gray-800'> {props.ride?.pickup}</p>
+                        <h3 className='text-lg font-medium'> {props.ride?.pickup}</h3>
+                         <p  className='text-sm   text-gray-800'> {props.ride?.pickup} Ranchi Railway station</p>
                     </div>
 
                 </div>
                 <div className='flex item-center gap-6 p-3 border-b-2' >
-                      <i className="ri-map-pin-time-line"></i>  {/* users final location */}
+                      <i className=" text-2xl ri-map-pin-time-line"></i>  {/* users final location */}
                     <div>
-                        <h3 className='text-lg font-medium'>  CIT,  </h3>
-                         <p  className='text-sm   text-gray-800'>  {props.ride?.destination} </p>
+                        <h3 className='text-lg font-medium'>   {props.ride?.destination}  </h3>
+                         <p  className='text-sm   text-gray-800'>  {props.ride?.destination} Ranchi Airport </p>
                     </div>
                 </div>
 
                 <div className='flex item-center gap-6 p-3  '>
-                    <i className=" ri-money-rupee-circle-fill"></i>  {/* money */}
+                    <i className="text-2xl ri-money-rupee-circle-fill"></i>  {/* money */}
                     <div>
                         <h3 className='text-lg font-medium'>  ₹{props.ride?.fare}  </h3>
                          <p  className='text-sm   text-gray-800'> cash </p>

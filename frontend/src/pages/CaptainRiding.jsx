@@ -31,7 +31,7 @@ const CaptainRiding = () => {
        <div className='fixed p-6 top-1 flex items-center justify-between w-screen'>
         <img className='w-16' src="https://imgs.search.brave.com/iUu_pSUB4XC14yY3lkGujRPUI3q11j4kizg-ipgasO8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/bG9nb3BuZy5jb20v/aW1hZ2VzL2FsbF9p/bWcvMTY1OTc2ODc3/OXViZXItbG9nby13/aGl0ZS5wbmc" alt="" />
         
-         <Link to='/captain-home' className=' top-4 left-4 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
+         <Link to='/captain-home' className='h-10 w-10 bg-white flex items-center justify-center rounded-full ml-2'>
             <i className="text-lg font-medium ri-logout-box-line  "></i>
         </Link>
        </div>

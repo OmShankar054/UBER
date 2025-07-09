@@ -318,9 +318,6 @@ async function createRide() {
                       
             </div>
 
-
-
-
         </div>
     );
 };
