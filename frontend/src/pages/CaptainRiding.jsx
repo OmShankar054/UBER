@@ -49,7 +49,7 @@ const CaptainRiding = () => {
 
         }} ><i className=" text-3xl text-red-500 ri-arrow-up-wide-line"></i> </h5>
          <h4 className='text-xl mt-1 font-semibold '> 2 KM away</h4>
-         <button className ='mt-1 bg-green-800 text-white font-bold p-3 px-11 rounded-lg ' >Finished Ride</button>
+         <Link className ='mt-1 bg-green-800 text-white font-bold p-3 px-11 rounded-lg ' >Finished Ride</Link>
         
             
       </div>

@@ -3,7 +3,7 @@ import {useGSAP} from '@gsap/react'
 import gsap from "gsap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
- import 'remixicon/fonts/remixicon.css'
+import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/vehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
@@ -233,13 +233,11 @@ async function createRide() {
                         <form onSubmit={(e) => {
                             submitHandler(e)
                             }} > 
-
-                          <div className="line absolute h-20 w-2 top-[46%] left-11 bg-gray-900 rounded-full "></div>
+                          <div className="line absolute h-20 w-2 top-[39%] left-11 bg-gray-900 rounded-full "></div>
                           <input
                             onClick={() => {
                                setPanelOpen(true)
                             }}
-
                             value={pickup}
                             onChange={(e) => {
                                 setPickup(e.target.value)
@@ -247,8 +245,7 @@ async function createRide() {
                             className='bg-[#eee] px-10 py-2 text-lg rounded-lg w-full mt-6 pb-3'
                             type="text"
                             placeholder="Enter a pickup location"
-                            />
-                            
+                            />  
                             <input
                             onClick={() => {  // This will open the panel when the input is clicked
                                setPanelOpen(true) // This is just a placeholder for the panel logic
@@ -260,10 +257,8 @@ async function createRide() {
                             className='bg-[#eee] px-10 py-2 text-lg rounded-lg w-full mt-3 pb-3'
                             type="text"
                             placeholder="Enter a destination location"
-
                             />
                         </form>
-
                           <button
                             onClick={findTrip}
                             className='bg-black text-white px-2 py-2 rounded-lg mt-2 w-full'>

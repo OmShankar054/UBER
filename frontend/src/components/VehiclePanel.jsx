@@ -18,11 +18,11 @@ const VehiclePanel = (props) => {
                       alt="car"
                     />
                     <div className="ml-4 w-1/2">
-                      <h4 className="font-medium text-base">UberGo <span><i className="ri-user-5-fill"></i> 4</span></h4>
+                      <h4 className="font-medium text-base">QuickCabGo <span><i className="ri-user-5-fill"></i> 4</span></h4>
                       <h5 className="font-medium text-sm">4 mins away</h5>
                       <p className="font-normal text-xs">Affordable</p>
                     </div>
-                    <h2 className="text-lg font-semibold">{props.fare.car} </h2>
+                    <h2 className="text-lg font-semibold">₹{props.fare.car} 200</h2>
                 </div>
 
                 <div onClick={() => {
@@ -35,11 +35,11 @@ const VehiclePanel = (props) => {
                       alt="auto"
                     />
                     <div className="ml-4 w-1/2">
-                      <h4 className="font-medium text-base">UberAuto <span><i className="ri-user-5-fill"></i> 2</span></h4>
+                      <h4 className="font-medium text-base">QuickCabAuto <span><i className="ri-user-5-fill"></i> 2</span></h4>
                       <h5 className="font-medium text-sm">2 mins away</h5>
                       <p className="font-normal text-xs">Affordable and safe rides</p>
                     </div>
-                    <h2 className="text-lg font-semibold">{props.fare.auto}</h2>
+                    <h2 className="text-lg font-semibold">₹{props.fare.auto}120</h2>
                 </div>
 
                 <div onClick={() => {
@@ -52,11 +52,11 @@ const VehiclePanel = (props) => {
                       alt="bike"
                     />
                     <div className="ml-4 w-1/2">
-                      <h4 className="font-medium text-base">UberGo <span><i className="ri-user-5-fill"></i> 1</span></h4>
+                      <h4 className="font-medium text-base"> QuickCabMoto <span><i className="ri-user-5-fill"></i> 1</span></h4>
                       <h5 className="font-medium text-sm">5 mins away</h5>
                       <p className="font-normal text-xs">Affordable, safe rides</p>
                     </div>
-                    <h2 className="text-lg font-semibold"> {props.fare.moto}</h2>
+                    <h2 className="text-lg font-semibold">₹100 {props.fare.moto}</h2>
                 </div>
     </div>
   )

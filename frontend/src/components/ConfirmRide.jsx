@@ -57,7 +57,7 @@ const ConfirmRide = (props) => {
                 <div className='flex item-center gap-6 p-3  '>
                     <i className=" ri-money-rupee-circle-fill"></i>  {/* money */}
                     <div>
-                        <h3 className='text-lg font-medium'> ₹{props.fare[props.vehicleType] } </h3>
+                        <h3 className='text-lg font-medium'> ₹200{props.fare[props.vehicleType] } </h3>
                          <p  className='text-sm   text-gray-800'> cash amount </p>
                     </div>
                 </div>
